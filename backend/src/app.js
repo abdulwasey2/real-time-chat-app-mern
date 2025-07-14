@@ -5,7 +5,7 @@ import { app } from './socket/socket.js';
 
 // Middlewares
 app.use(cors({
-    origin: "process.env.CORS_ORIGIN", // Frontend URL
+    origin: "https://realtime-mern-chat.netlify.app", // Frontend URL
     credentials: true,
 }));
 app.use(express.json({ limit: '16kb' }));
