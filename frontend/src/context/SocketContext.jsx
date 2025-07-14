@@ -14,25 +14,29 @@ export const SocketProvider = ({ children }) => {
     const { authUser } = useAuth();
 
     useEffect(() => {
-    if (authUser) {
-        const newSocket = io("https://real-time-chat-app-backend-l2od.onrender.com/", {
-            query: { userId: authUser._id },
-        });
+        if (authUser) {
+            // Socket connection create karein
+            const newSocket = io("https://real-time-chat-app-backend-l2od.onrender.com/", {
+                query: { userId: authUser._id },
+            });
 
-        setSocket(newSocket);
+            setSocket(newSocket);
 
-        newSocket.on("getOnlineUsers", (users) => {
-            setOnlineUsers(users);
-        });
+            // Online users ki list listen karein
+            newSocket.on("getOnlineUsers", (users) => {
+                setOnlineUsers(users);
+            });
 
-        return () => newSocket.close();
-    } else {
-        if (socket) {
-            socket.close();
-            setSocket(null);
+            // Cleanup function: component unmount hone par socket close karein
+            return () => newSocket.close();
+        } else {
+            // Agar user logout ho jaye to socket close karein
+            if (socket) {
+                socket.close();
+                setSocket(null);
+            }
         }
-    }
-}, [authUser]); // ESLint warning hatane ke liye; // socket ko dependency mein add karne ki zaroorat nahi;
+    }, [authUser, socket]); // ESLint warning hatane ke liye; // socket ko dependency mein add karne ki zaroorat nahi;
 
     return (
         <SocketContext.Provider value={{ socket, onlineUsers }}>
