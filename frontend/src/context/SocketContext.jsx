@@ -36,6 +36,7 @@ export const SocketProvider = ({ children }) => {
                 setSocket(null);
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [authUser]); // ESLint warning hatane ke liye; // socket ko dependency mein add karne ki zaroorat nahi;
 
     return (
