@@ -4,9 +4,11 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/user.model.js";
 
 // Options for cookie
+// Options for cookie
 const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // Sirf production mein secure hoga
+    secure: process.env.NODE_ENV === "production", // Production mein hamesha true hoga
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // Cross-site requests ke liye zaroori
 };
 
 /**
