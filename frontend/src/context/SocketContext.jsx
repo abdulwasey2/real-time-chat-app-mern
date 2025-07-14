@@ -36,7 +36,7 @@ export const SocketProvider = ({ children }) => {
                 setSocket(null);
             }
         }
-    }, [authUser, socket]); // ESLint warning hatane ke liye; // socket ko dependency mein add karne ki zaroorat nahi;
+    }, [authUser]); // ESLint warning hatane ke liye; // socket ko dependency mein add karne ki zaroorat nahi;
 
     return (
         <SocketContext.Provider value={{ socket, onlineUsers }}>
